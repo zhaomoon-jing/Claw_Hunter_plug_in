@@ -84,7 +84,7 @@ extension/
 
 1. 在问题页面按 `F12` → Console，看红色报错；
 2. 常见：`extension context invalidated` → 在扩展管理页点 ⟳ 重载插件；
-3. 若页面结构改版（class 变了），右键检查元素，把岗位卡片/JD 区块的 class 名发回来，
+3. 若页面结构改版（class 变了），右键检查元素，把岗位卡片/JD 区块的 class 名查看，
    在 `content/platforms.js` 对应平台的 `cards / cardFields / detailFields / anchors` 数组里加一个 fallback 选择器即可；
 4. 想要插件更新后立即生效：扩展管理页点 ⟳ 重载，然后刷新招聘页面。
 
@@ -95,7 +95,7 @@ extension/
 node test/test-matcher.js
 
 # jsdom 集成测试（四平台：列表徽章 + 详情匹配卡，36 项）
-set NODE_PATH=C:\Users\xianyue\.workbuddy\binaries\node\workspace\node_modules
+set NODE_PATH=**\.workbuddy\binaries\node\workspace\node_modules 使用根目录
 node test/test-dom.js
 ```
 

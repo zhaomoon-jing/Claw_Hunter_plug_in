@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>爪猎 JobHunter - 配置</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --line: #e5e7eb;
+      --ink: #1f2937;
+      --sub: #6b7280;
+      --brand: #6366f1;
+      --brand-dark: #4f46e5;
+      --ok: #16a34a;
+      --warn: #d97706;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 80px; }
+    h1 { font-size: 20px; margin: 0 0 4px; }
+    .sub { color: var(--sub); margin: 0 0 24px; font-size: 13px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(15,23,42,.04);
+    }
+    .card h2 { font-size: 15px; margin: 0 0 12px; }
+    label { display: block; font-size: 13px; color: var(--sub); margin: 12px 0 4px; }
+    input[type=text], textarea, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--ink);
+      background: #fff;
+    }
+    input:focus, textarea:focus { outline: none; border-color: var(--brand); }
+    textarea { resize: vertical; }
+    .row { display: flex; gap: 12px; }
+    .row > div { flex: 1; }
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-primary { background: var(--brand); color: #fff; }
+    .btn-primary:hover { background: var(--brand-dark); }
+    .btn-ghost { background: #eef0f4; color: #374151; }
+    .btn-ghost:hover { background: #e2e5ea; }
+    .btn-danger { background: #fef2f2; color: #dc2626; }
+    .hint { font-size: 12px; color: var(--sub); margin-top: 6px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: #eef2ff; color: #4338ca;
+      border-radius: 999px; padding: 3px 8px 3px 10px;
+      font-size: 12px; border: 1px solid #e0e7ff;
+    }
+    .chip button {
+      background: none; border: 0; color: #6366f1;
+      font-size: 14px; padding: 0 2px; cursor: pointer; line-height: 1;
+    }
+    .chip button:hover { color: #dc2626; }
+    .add-chip-row { display: flex; gap: 6px; margin-top: 8px; }
+    .add-chip-row input { flex: 1; }
+    .add-chip-row button { flex: 0 0 auto; }
+    #status {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: rgba(17,24,39,.9); color: #fff;
+      border-radius: 999px; padding: 8px 18px; font-size: 13px;
+      opacity: 0; transition: opacity .25s; pointer-events: none;
+    }
+    #status.show { opacity: 1; }
+    .tag { display: inline-block; font-size: 11px; padding: 1px 8px; border-radius: 999px; margin-left: 8px; vertical-align: 2px; }
+    .tag-ok { background: #e8f7ee; color: #15803d; }
+    .tag-warn { background: #fef3c7; color: #b45309; }
+    .jsonbox { font-family: Consolas, monospace; font-size: 12px; min-height: 140px; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .empty { color: var(--sub); font-size: 13px; padding: 8px 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>🐾 爪猎 JobHunter 配置 <span id="stateTag" class="tag tag-warn">未配置档案</span></h1>
+    <p class="sub">匹配度只按「技能 / 职位方向 / 薪资」计算，城市与公司不参与打分 —— 使用网站时请自行切换到目标城市。</p>
+
+    <!-- 第一步：简历档案 -->
+    <div class="card">
+      <h2>① 简历档案</h2>
+      <p class="hint">从简历 PDF/Word 里复制全文粘贴到下面，自动提取姓名、技能、期望薪资、目标职位（提取结果可手动增删）。</p>
+      <label for="resumeText">粘贴简历全文</label>
+      <textarea id="resumeText" rows="6" placeholder="姓名：张三&#10;求职意向：大模型应用开发工程师&#10;技能：Python、PyTorch、RAG、FastAPI ...&#10;期望薪资：17k-25k"></textarea>
+      <div class="actions" style="margin-top:10px">
+        <button id="btnExtract" class="btn-primary">从文本提取档案</button>
+        <button id="btnPaste" class="btn-ghost">从剪贴板粘贴</button>
+      </div>
+
+      <div id="profileForm" style="display:none">
+        <div class="row">
+          <div>
+            <label>姓名</label>
+            <input type="text" id="fName" placeholder="选填" />
+          </div>
+          <div>
+            <label>期望薪资（如 17k-25k 或 2万-3万）</label>
+            <input type="text" id="fSalary" placeholder="选填，用于薪资匹配打分" />
+          </div>
+        </div>
+        <label>目标职位关键词（标题命中一个即得职位方向分）</label>
+        <div class="chips" id="fRoles"></div>
+        <div class="add-chip-row">
+          <input type="text" id="roleInput" placeholder="如：大模型应用开发工程师" />
+          <button class="btn-ghost" id="btnAddRole">添加</button>
+        </div>
+        <label>我的技能（出现在 JD 中越多，技能分越高）</label>
+        <div class="chips" id="fSkills"></div>
+        <div class="add-chip-row">
+          <input type="text" id="skillInput" placeholder="如：RAG、LangChain、PyTorch" />
+          <button class="btn-ghost" id="btnAddSkill">添加</button>
+        </div>
+        <div class="actions" style="margin-top:16px">
+          <button id="btnSaveProfile" class="btn-primary">保存档案</button>
+          <button id="btnExportJson" class="btn-ghost">导出 JSON</button>
+          <button id="btnImportJson" class="btn-ghost">导入 JSON</button>
+          <button id="btnClearProfile" class="btn-danger">清空档案</button>
+        </div>
+        <p class="hint">导出/导入 JSON 可与你本地 Python 端（claw-jobhunter）的 data/resume_profile.json 互通。</p>
+      </div>
+    </div>
+
+    <!-- 第二步：投递设置 -->
+    <div class="card">
+      <h2>② 投递设置</h2>
+      <div class="row">
+        <div>
+          <label>匹配分阈值（低于此分不推荐投递）</label>
+          <input type="text" id="minScore" placeholder="60" />
+        </div>
+        <div>
+          <label>列表页显示打分徽章</label>
+          <select id="badgeEnabled">
+            <option value="true">显示</option>
+            <option value="false">隐藏</option>
+          </select>
+        </div>
+      </div>
+      <label>打招呼话术模板（可留空用默认；支持 {name} {job} {skills} 占位符）</label>
+      <textarea id="pitchTemplate" rows="3" placeholder="您好，我是{name}，看到贵司「{job}」岗位很感兴趣，我具备{skills}等技能，期待进一步沟通！"></textarea>
+      <div class="actions" style="margin-top:12px">
+        <button id="btnSaveSettings" class="btn-primary">保存设置</button>
+      </div>
+    </div>
+
+    <!-- 第三步：使用说明 -->
+    <div class="card">
+      <h2>③ 使用方式</h2>
+      <ol class="hint" style="padding-left:18px; line-height:2">
+        <li>打开 <b>Boss直聘 / 智联 / 拉勾 / 猎聘</b>，搜索岗位并切换到目标城市（城市不影响打分）。</li>
+        <li>列表页每张卡片右上角显示 <b>匹配分徽章</b>，快速筛选高匹配岗位。</li>
+        <li>进入岗位详情页，JD 上方出现 <b>匹配分析卡</b>：精确分、命中/缺失技能、薪资对比、打招呼话术。</li>
+        <li>确认匹配后点 <b>投递该岗位</b>，二次确认后自动点击页面投递按钮，完成弹窗最后一步即可。</li>
+      </ol>
+    </div>
+  </div>
+
+  <div id="status"></div>
+  <script src="../content/matcher.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

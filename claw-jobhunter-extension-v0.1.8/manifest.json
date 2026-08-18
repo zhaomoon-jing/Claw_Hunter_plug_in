@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "爪猎 · 简历匹配投递助手",
+  "version": "0.1.8",
+  "description": "根据本地简历给 Boss直聘/智联/拉勾/猎聘 的岗位实时打匹配分、生成打招呼话术，人工复核后一键投递。城市自行切换，不参与打分。",
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.zhipin.com/*",
+    "*://*.zhaopin.com/*",
+    "*://*.lagou.com/*",
+    "*://*.liepin.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options/options.html",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "爪猎 · 简历匹配投递助手",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.zhipin.com/*",
+        "*://*.zhaopin.com/*",
+        "*://*.lagou.com/*",
+        "*://*.liepin.com/*"
+      ],
+      "css": ["content/content.css"],
+      "js": ["content/matcher.js", "content/platforms.js", "content/inject.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

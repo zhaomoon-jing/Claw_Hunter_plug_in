@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>爪猎 JobHunter · 简历匹配投递助手（浏览器插件）</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f6f7fb; color: #1f2937; line-height: 1.7; }
+  .hero { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; padding: 48px 24px 40px; text-align: center; }
+  .hero .logo { font-size: 44px; }
+  .hero h1 { font-size: 26px; margin: 10px 0 6px; }
+  .hero p { opacity: .92; font-size: 14px; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 28px 20px 60px; }
+  .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px 24px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(15,23,42,.04); }
+  .card h2 { font-size: 17px; margin-bottom: 10px; color: #4338ca; }
+  .card h3 { font-size: 14px; margin: 14px 0 6px; }
+  .card p, .card li { font-size: 13.5px; color: #374151; }
+  ul, ol { padding-left: 20px; }
+  li { margin: 3px 0; }
+  .tag { display: inline-block; background: #eef2ff; color: #4338ca; border-radius: 999px; padding: 1px 10px; font-size: 12px; margin-right: 6px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+  .feat { background: #f8fafc; border-radius: 8px; padding: 10px 12px; font-size: 13px; }
+  .feat b { color: #1e293b; }
+  code { background: #f1f5f9; border-radius: 4px; padding: 1px 6px; font-size: 12px; color: #be185d; }
+  .foot { text-align: center; color: #9ca3af; font-size: 12px; margin-top: 20px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  th, td { border: 1px solid #e5e7eb; padding: 6px 10px; text-align: left; }
+  th { background: #f8fafc; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="logo">🐾</div>
+    <h1>爪猎 JobHunter</h1>
+    <p>浏览器插件 · 简历 × 岗位实时匹配打分 · 人工复核后一键投递</p>
+    <p style="margin-top:8px">
+      <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">v0.1.8</span>
+      <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">Boss直聘</span>
+      <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">智联招聘</span>
+      <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">拉勾网</span>
+      <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">猎聘</span>
+    </p>
+  </div>
+
+  <div class="wrap">
+    <div class="card">
+      <h2>这是什么</h2>
+      <p>在你自己已登录的浏览器里刷岗位时，插件自动读取岗位卡片和 JD，对照你的简历档案实时计算<b>匹配分</b>（技能 50 / 职位方向 30 / 薪资 20，总分 100；城市与公司不参与打分）。列表页看徽章快速筛选，详情页看精确匹配分析，确认后一键点击页面投递按钮（半自动，最后一步人工确认）。</p>
+    </div>
+
+    <div class="card">
+      <h2>核心功能</h2>
+      <div class="grid">
+        <div class="feat">🎯 <b>列表页打分徽章</b><br/>每张岗位卡片右上角显示匹配分（绿/橙/灰），悬停看命中技能</div>
+        <div class="feat">📋 <b>详情页匹配分析卡</b><br/>精确分 + 技能/职位/薪资三条进度 + 命中/缺失技能 + 薪资对比</div>
+        <div class="feat">💬 <b>打招呼话术</b><br/>自动生成可编辑话术，一键复制</div>
+        <div class="feat">🚀 <b>一键投递</b><br/>确认后自动点击页面投递按钮，已投递岗位本地标记防重复</div>
+        <div class="feat">📥 <b>简历档案一键导入</b><br/>粘贴简历全文自动提取技能/期望薪资/目标职位，可手动增删</div>
+        <div class="feat">🔒 <b>完全本地</b><br/>档案只存浏览器本地，无任何外部请求，不读取无关信息</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>安装（Chrome / Edge）</h2>
+      <ol>
+        <li>打开扩展管理页：<code>edge://extensions</code> 或 <code>chrome://extensions</code></li>
+        <li>打开右上角「开发者模式」</li>
+        <li>点「加载已解压的扩展程序」，选择本 zip 解压后的文件夹</li>
+        <li>工具栏出现 🐾 图标即安装成功</li>
+      </ol>
+      <p style="margin-top:8px">将本 zip 下载解压，即得到插件源码目录（内含 <code>manifest.json</code>）。</p>
+    </div>
+
+    <div class="card">
+      <h2>使用</h2>
+      <ol>
+        <li>点 🐾 → 打开配置页 → 粘贴简历全文 → 「从文本提取档案」→ 核对保存</li>
+        <li>打开 Boss/智联/拉勾/猎聘 搜索岗位（城市用网站自己的选择器切换）</li>
+        <li>列表页看卡片右上角匹配分徽章，详情页看匹配分析卡</li>
+        <li>匹配则点「投递该岗位」→ 二次确认 → 自动点击页面投递按钮，完成弹窗最后一步</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>评分规则（总分 100）</h2>
+      <table>
+        <tr><th>维度</th><th>权重</th><th>说明</th></tr>
+        <tr><td>技能匹配</td><td>50</td><td>JD 文本命中多少简历技能（按 min(技能数,10) 归一）</td></tr>
+        <tr><td>职位方向</td><td>30</td><td>岗位标题命中目标职位关键词</td></tr>
+        <tr><td>薪资匹配</td><td>20</td><td>岗位薪资区间与期望区间重叠程度</td></tr>
+        <tr><td>城市 / 公司</td><td>—</td><td>不参与打分（城市在网站上自行切换）</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>包内文件</h2>
+      <p style="font-size:12.5px;color:#6b7280">manifest.json · background.js · content/（matcher.js 匹配引擎 / platforms.js 平台适配 / inject.js 页面注入 / content.css）· options/（配置页）· popup/（弹窗）· assets/（图标）· README.md</p>
+      <p style="margin-top:6px;font-size:12.5px;color:#6b7280">测试：单测 26 项 + 四平台 jsdom 集成 44 项全部通过；智联真实页面（Playwright Edge）20/20 卡片验证出分。</p>
+    </div>
+
+    <div class="foot">爪猎 JobHunter v0.1.8 · 个人求职效率工具 · 档案数据仅存本地浏览器</div>
+  </div>
+</body>
+</html>

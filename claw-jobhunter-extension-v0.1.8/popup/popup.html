@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>爪猎 JobHunter</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      width: 300px;
+      margin: 0;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      color: #1f2937;
+      background: #f8f9fc;
+    }
+    .head {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 14px;
+      background: #fff;
+      border-bottom: 1px solid #eef0f4;
+    }
+    .head .logo { font-size: 18px; }
+    .head h1 { font-size: 14px; margin: 0; font-weight: 700; }
+    .head .st { margin-left: auto; font-size: 11px; color: #6b7280; }
+    .body { padding: 12px 14px; }
+    .row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; }
+    .row .k { color: #6b7280; }
+    .row .v { font-weight: 600; }
+    .v.ok { color: #16a34a; }
+    .v.warn { color: #d97706; }
+    .inj { font-size: 11px; color: #9ca3af; margin-top: 6px; }
+    .inj.ok { color: #16a34a; }
+    .inj.err { color: #dc2626; word-break: break-all; }
+    .btn {
+      display: block; width: 100%;
+      border: 0; border-radius: 8px;
+      background: #6366f1; color: #fff;
+      font-size: 13px; font-weight: 600;
+      padding: 9px 0; margin-top: 10px; cursor: pointer;
+      font-family: inherit;
+    }
+    .btn:hover { background: #4f46e5; }
+    .btn.ghost { background: #eef0f4; color: #374151; }
+    .btn.ghost:hover { background: #e2e5ea; }
+    .tip { font-size: 12px; color: #6b7280; line-height: 1.6; margin-top: 8px; }
+    .foot {
+      padding: 8px 14px 12px;
+      border-top: 1px solid #eef0f4;
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: #9ca3af;
+    }
+    .foot a { color: #6366f1; text-decoration: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="head">
+    <span class="logo">🐾</span>
+    <h1>爪猎 JobHunter</h1>
+    <span class="st" id="pageName">未在支持的招聘网站</span>
+  </div>
+  <div class="body">
+    <div class="row"><span class="k">简历档案</span><span class="v" id="profileState">—</span></div>
+    <div class="row"><span class="k">匹配阈值</span><span class="v" id="minScore">—</span></div>
+    <div class="row"><span class="k">今日已投递</span><span class="v" id="appliedCount">—</span></div>
+    <div id="injStatus" class="inj"></div>
+    <button class="btn" id="btnInject">强制注入当前页（无分时点这里）</button>
+    <button class="btn ghost" id="btnOptions">打开配置页</button>
+    <p class="tip" id="tip">在 Boss直聘/智联/拉勾/猎聘 的岗位列表页查看匹配徽章，进详情页查看精确匹配分析并一键投递。若页面没有分数：点上方「强制注入」→ 再刷新页面。</p>
+  </div>
+  <div class="foot">
+    <span>城市/公司不打分</span>
+    <a id="btnRefresh">刷新</a>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

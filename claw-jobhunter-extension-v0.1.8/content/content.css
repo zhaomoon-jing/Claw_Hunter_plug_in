@@ -1,0 +1,236 @@
+/* 爪猎 JobHunter - 页面注入样式（浅色，贴合 Boss 直聘） */
+
+/* ---- 列表页徽章（右上角角标，微悬出避免压字） ---- */
+.jh-badge {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  z-index: 9999;
+  background: var(--jh-c, #16a34a);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 4px 7px;
+  border-radius: 999px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  cursor: default;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  pointer-events: auto;
+}
+/* 完全内缩模式：检测到父级 overflow 裁剪时使用，绝不悬出 */
+.jh-badge.jh-badge-inset {
+  top: 4px;
+  right: 4px;
+}
+/* 标题旁内联模式：避免被卡片 overflow 裁剪；flex 容器里防被压缩成竖排 */
+.jh-badge.jh-badge-inline {
+  position: relative;
+  display: inline-block;
+  margin: 0 0 0 8px;
+  vertical-align: middle;
+  box-shadow: none;
+  white-space: nowrap;        /* 徽章内部不换行（"45分"保持一行） */
+  flex-shrink: 0;            /* flex 容器中不被压缩 */
+  min-width: max-content;     /* 最小宽度 = 内容宽度 */
+  font-size: 11px;
+  padding: 3px 6px;
+}
+.jh-badge-tip {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: max-content;
+  max-width: 260px;
+  background: rgba(30, 32, 38, 0.92);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 6px 9px;
+  border-radius: 6px;
+  white-space: normal;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+.jh-badge:hover .jh-badge-tip { display: block; }
+
+/* ---- 详情页匹配卡 ---- */
+.jh-card {
+  box-sizing: border-box;
+  margin: 12px 0 16px;
+  padding: 14px 16px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-left: 4px solid #6366f1;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #1f2937;
+  position: relative;
+  z-index: 50;
+}
+.jh-head { display: flex; gap: 16px; align-items: center; }
+.jh-score {
+  flex: 0 0 auto;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: #94a3b8;
+}
+.jh-score.jh-high { background: #f43f5e; }
+.jh-score.jh-mid { background: #d97706; }
+.jh-score.jh-low { background: #94a3b8; }
+.jh-score-num { font-size: 26px; font-weight: 800; line-height: 1; }
+.jh-score-txt { font-size: 11px; margin-top: 3px; opacity: 0.92; }
+
+.jh-bars { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.jh-bar-row { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.jh-bar-label { flex: 0 0 56px; color: #6b7280; }
+.jh-bar { flex: 1; height: 6px; background: #eef0f3; border-radius: 999px; overflow: hidden; }
+.jh-bar-fill { display: block; height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 999px; }
+.jh-bar-val { flex: 0 0 44px; text-align: right; color: #374151; font-weight: 600; }
+
+.jh-chips { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.jh-chip-line { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; font-size: 12px; }
+.jh-chip-h { color: #6b7280; margin-right: 2px; }
+.jh-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+.jh-chip.jh-ok { background: #e8f7ee; color: #15803d; border: 1px solid #bbf7d0; }
+.jh-chip.jh-no { background: #f3f4f6; color: #9ca3af; border: 1px dashed #d1d5db; }
+
+.jh-sal {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #374151;
+  background: #f8fafc;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+.jh-warn-line {
+  color: #b45309;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+}
+
+.jh-pitch { margin-top: 12px; }
+.jh-pitch-label { font-size: 12px; color: #6b7280; margin-bottom: 4px; }
+.jh-pitch-input {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+  font-family: inherit;
+  color: #1f2937;
+  background: #fff;
+}
+.jh-pitch-input:focus { outline: none; border-color: #6366f1; }
+.jh-pitch-actions { margin-top: 6px; }
+
+.jh-actions { margin-top: 12px; display: flex; gap: 10px; }
+.jh-btn {
+  border: 0;
+  border-radius: 6px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.jh-btn-apply { background: #f43f5e; color: #fff; }
+.jh-btn-apply:hover { background: #e11d48; }
+.jh-btn-open { background: #f3f4f6; color: #374151; }
+.jh-btn-open:hover { background: #e5e7eb; }
+.jh-btn-copy { background: #eef2ff; color: #4338ca; padding: 5px 12px; }
+.jh-btn-cancel { background: #f3f4f6; color: #374151; }
+
+/* ---- 确认弹层 ---- */
+.jh-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.jh-confirm {
+  width: 420px;
+  max-width: calc(100vw - 48px);
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  color: #1f2937;
+}
+.jh-confirm-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+.jh-confirm-line { font-size: 13px; color: #4b5563; margin: 6px 0; }
+.jh-confirm-warn { color: #b45309; background: #fffbeb; padding: 8px 10px; border-radius: 6px; }
+.jh-confirm-actions { margin-top: 16px; display: flex; justify-content: flex-end; gap: 10px; }
+.jh-confirm-ok { background: #f43f5e; color: #fff; }
+
+/* ---- 已投递标记 ---- */
+.jh-applied {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2147483000;
+  background: #16a34a;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+/* ---- 提示条 ---- */
+.jh-hint {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2147483000;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 13px;
+  padding: 8px 16px;
+  text-align: center;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.jh-hint a { color: #b45309; font-weight: 700; }
+
+/* ---- toast ---- */
+.jh-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 60px;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 2147483001;
+  background: rgba(17, 24, 39, 0.92);
+  color: #fff;
+  font-size: 13px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.jh-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
